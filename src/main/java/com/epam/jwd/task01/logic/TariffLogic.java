@@ -28,6 +28,24 @@ public class TariffLogic {
         this.dao = dao;
     }
 
+    /**
+     * The method is designed to generate a list of tariffs
+     * based on the criteria specified in the parameters of this method
+     *
+     * @param firstConnectionFeeLow     low limit of the first connection fee for the tariff
+     * @param firstConnectionFeeHigh    high limit of the first connection fee for the tariff
+     * @param periodicalFeeLow          low limit of the periodical fee for the tariff
+     * @param periodicalFeeHigh         high limit of the periodical fee for the tariff
+     * @param minuteAmountLow           low limit of the minutes amount included in the tariff
+     * @param minuteAmountHigh          high limit of the minutes amount included in the tariff
+     * @param SMSAmountLow              low limit of the SMS amount included in the tariff
+     * @param SMSAmountHigh             high limit of the SMS amount included in the tariff
+     * @param internetTrafficAmountLow  low limit of the Internet traffic included in the tariff
+     * @param internetTrafficAmountHigh high limit of the Internet traffic included in the tariff
+     * @param limit                     the maximum allowable number of tariffs to be included in the returned list
+     * @param comparator                comparator for sorting tariffs in the returned list
+     * @return the list of tariffs generated based on the criteria specified in the method parameters
+     */
     public List<Tariff> getTariffListByParameter(Optional<BigDecimal> firstConnectionFeeLow,
                                                  Optional<BigDecimal> firstConnectionFeeHigh,
                                                  Optional<BigDecimal> periodicalFeeLow,
@@ -80,14 +98,34 @@ public class TariffLogic {
         return dao.find(predicates.stream().reduce(Predicate::and), limit, comparator);
     }
 
+    /**
+     * Method for generating list of all tariffs contained in DAO layer
+     *
+     * @return the list of all tariffs contained in DAO layer
+     */
     public List<Tariff> getAllTariff() {
         return dao.find();
     }
 
+    /**
+     * Method that returns amount of mobile company clients contained in DAO layer
+     *
+     * @return amount of mobile company clients contained in DAO layer
+     */
     public Long getAbonentAmount() {
         return TariffCreator.getInstance().getAmount();
     }
 
+    /**
+     * Method for generating list of tariffs with Internet traffic,
+     * periodical payment less than <i>periodicalFeeHighLimit</i>
+     * and also sorted by connection fee value
+     *
+     * @param periodicalFeeHighLimit high bound for periodical fee
+     * @return the list of tariffs with Internet traffic,
+     * periodical payment less than <i>periodicalFeeHighLimit</i>
+     * and also sorted by connection fee value
+     */
     public List<Tariff> getTariffWithInternetAndPeriodicalFeeLessThanNumber(BigDecimal periodicalFeeHighLimit) {
         return getTariffListByParameter(Optional.empty(),
                 Optional.empty(),
@@ -103,6 +141,11 @@ public class TariffLogic {
                 Optional.of(SORT_BY_FIRST_CONNECTION_FEE));
     }
 
+    /**
+     * Method that returns list of tariffs sorted by periodical fee
+     *
+     * @return list of tariffs sorted by periodical fee
+     */
     public List<Tariff> getTariffSortedByPeriodicalFee() {
         return getTariffListByParameter(Optional.empty(),
                 Optional.empty(),
