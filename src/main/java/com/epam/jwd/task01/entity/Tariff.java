@@ -5,18 +5,18 @@ import java.util.Objects;
 
 /**
  * A simplified abstraction of a mobile company tariff that includes properties such as
- * - tariff's name
- * - cost of first connection fee
- * - cost of periodical fee
- * - minute amount that is included to a tariff
- * - SMS amount that is included to a tariff
- * - Internet traffic amount that is included to a tariff
+ * -- tariff's name
+ * -- cost of first connection fee
+ * -- cost of periodical fee
+ * -- minute amount that is included to a tariff
+ * -- SMS amount that is included to a tariff
+ * -- Internet traffic amount that is included to a tariff
  */
 
 public class Tariff implements Comparable<Tariff> {
     public static final String DEFAULT_TARIFF_NAME = "Base tariff";
-    public static final BigDecimal DEFAULT_FIRST_CONNECTION_FEE = BigDecimal.valueOf(0.0);
-    public static final BigDecimal DEFAULT_PERIODICAL_FEE = BigDecimal.valueOf(0.0);
+    public static final BigDecimal DEFAULT_FIRST_CONNECTION_FEE = BigDecimal.ZERO;
+    public static final BigDecimal DEFAULT_PERIODICAL_FEE = BigDecimal.ZERO;
     public static final Integer DEFAULT_MINUTE_AMOUNT = 0;
     public static final Integer DEFAULT_SMS_AMOUNT = 0;
     public static final Integer DEFAULT_INTERNET_TRAFFIC_AMOUNT = 0;

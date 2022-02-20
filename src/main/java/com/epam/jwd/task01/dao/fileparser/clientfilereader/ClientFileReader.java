@@ -29,7 +29,13 @@ public class ClientFileReader {
         this.file = new File(fileName);
     }
 
-    public List<Client> readClientList() {
+    /**
+     * Method reads data of existing clients from file
+     * the link to which is stored in <i>file</i> field of this class
+     *
+     * @return list of of existing clients from <i>file</i>
+     */
+    public List<Client> readFileToClientList() {
         List<Client> clients = null;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -41,6 +47,13 @@ public class ClientFileReader {
         return clients;
     }
 
+    /**
+     * Method parses String line, generates fields for creating
+     * and creates an object of the Client class
+     *
+     * @param line text for parse
+     * @return client in accordance with the parsed and generated fields
+     */
     private Client parseLineToClient(String line) {
         String separator = DEFAULT_SEPARATOR;
         String[] clientFields = line.split(separator);

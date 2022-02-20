@@ -44,7 +44,13 @@ public class TariffFileReader {
         this.file = new File(fileName);
     }
 
-    public List<Tariff> readTariffList() {
+    /**
+     * Method reads data of existing tariffs from file
+     * the link to which is stored in <i>file</i> field of this class
+     *
+     * @return list of of existing tariffs from <i>file</i>
+     */
+    public List<Tariff> readFileToTariffList() {
         List<Tariff> tariffs = null;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -56,9 +62,15 @@ public class TariffFileReader {
         return tariffs;
     }
 
+    /**
+     * Method parses String line, generates fields for creating
+     * and creates an object of the Tariff class
+     *
+     * @param line text for parse
+     * @return tariff in accordance with the parsed and generated fields
+     */
     private Tariff parseLineToTariff(String line) {
-        String separator = DEFAULT_SEPARATOR;
-        String[] tariffFields = line.split(separator);
+        String[] tariffFields = line.split(DEFAULT_SEPARATOR);
         TariffTypes type = TariffTypes.valueOf(tariffFields[TARIFF_CODE_FILE_FIELD].trim());
 
         switch (type) {
@@ -67,14 +79,14 @@ public class TariffFileReader {
                     throw new TariffFileReaderException(DEFAULT_TARIFF_FIELDS_COUNT_NOT_VALID);
                 }
                 Object[] baseParams = new Object[DEFAULT_TARIFF_FIELDS_COUNT - 1];
-                parseTariffFields(tariffFields, baseParams);
+                parseCommonTariffFields(tariffFields, baseParams);
                 return TariffCreator.getInstance().create(TariffTypes.BASE, baseParams);
             case CORPORATE:
                 if (tariffFields.length != CORPORATE_TARIFF_FIELDS_COUNT) {
                     throw new TariffFileReaderException(CORPORATE_TARIFF_FIELDS_COUNT_NOT_VALID);
                 }
                 Object[] corporateParams = new Object[CORPORATE_TARIFF_FIELDS_COUNT - 1];
-                parseTariffFields(tariffFields, corporateParams);
+                parseCommonTariffFields(tariffFields, corporateParams);
                 try {
                     corporateParams[DEFAULT_ABONENT_AMOUNT_LOW_BOUND_FILE_FIELD - 1] =
                             Integer.parseInt(tariffFields[DEFAULT_ABONENT_AMOUNT_LOW_BOUND_FILE_FIELD].trim());
@@ -87,7 +99,14 @@ public class TariffFileReader {
         }
     }
 
-    private void parseTariffFields(String[] tariffFields, Object[] params) {
+    /**
+     * Method parses common fields for objects of Tariff class and its inheritors
+     *
+     * @param tariffFields string array containing field values ​​common for the Tariff class
+     *                     and its inheritors
+     * @param params       Object array where the parsed fields will be saved
+     */
+    private void parseCommonTariffFields(String[] tariffFields, Object[] params) {
         params[TARIFF_NAME_FILE_FIELD - 1] = tariffFields[TARIFF_NAME_FILE_FIELD].trim();
 
         try {

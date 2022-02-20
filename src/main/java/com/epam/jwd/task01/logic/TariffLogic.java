@@ -58,6 +58,7 @@ public class TariffLogic {
                                                  Optional<Integer> internetTrafficAmountHigh,
                                                  Optional<Integer> limit,
                                                  Optional<Comparator<Tariff>> comparator) {
+
         List<Predicate<Tariff>> predicates = new ArrayList<>();
 
         firstConnectionFeeLow.ifPresent(lowLimit ->
@@ -160,5 +161,4 @@ public class TariffLogic {
                 Optional.empty(),
                 Optional.of(SORT_BY_PERIODICAL_FEE));
     }
-
 }

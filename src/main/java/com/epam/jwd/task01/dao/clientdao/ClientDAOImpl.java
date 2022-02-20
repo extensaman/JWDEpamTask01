@@ -36,7 +36,7 @@ public class ClientDAOImpl implements ClientDAO {
     @Override
     public void load(String filePath) {
         ClientFileReader reader = new ClientFileReader(filePath);
-        List<Client> list = reader.readClientList();
+        List<Client> list = reader.readFileToClientList();
         deleteAll();
         insert(list);
     }

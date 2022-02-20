@@ -6,10 +6,10 @@ import java.util.Objects;
 /**
  * A simplified abstraction of a mobile company corporate tariff
  * which extends the parent class with a field which describes
- * the minimum allowable number of subscribers for a given tariff plan
+ * the minimum allowable number of subscribers for a given corporate tariff plan
  */
 
-public class CorporateTariff extends Tariff implements Cloneable {
+public class CorporateTariff extends Tariff {
     public static final int DEFAULT_ABONENT_AMOUNT_LOW_BOUND = 10;
     private final Integer abonentAmountLowBound;
 
@@ -63,10 +63,5 @@ public class CorporateTariff extends Tariff implements Cloneable {
         return super.toString() +
                 ", abonentAmountLowBound=" + abonentAmountLowBound +
                 '}';
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

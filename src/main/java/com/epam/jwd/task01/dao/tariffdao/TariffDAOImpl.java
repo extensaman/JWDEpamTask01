@@ -40,7 +40,7 @@ public class TariffDAOImpl implements TariffDAO {
     @Override
     public void load(String filePath) {
         TariffFileReader reader = new TariffFileReader(filePath);
-        List<Tariff> tariffList = reader.readTariffList();
+        List<Tariff> tariffList = reader.readFileToTariffList();
         deleteAll();
         insert(tariffList);
     }

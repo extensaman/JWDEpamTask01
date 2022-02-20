@@ -7,7 +7,7 @@ package com.epam.jwd.task01.service.tariffcreator;
 public class TariffCreatorException extends RuntimeException {
 
     /**
-     * Constructs a new runtime exception with {@code null} as its
+     * Constructs a new exception with {@code null} as its
      * detail message. The cause is not initialized.
      */
     public TariffCreatorException() {
