@@ -99,9 +99,9 @@ public class TariffLogic {
     }
 
     /**
-     * Method for generating list of all tariffs contained in DAO layer
+     * Method for generating list of all tariffs contained in TariffDAO-layer
      *
-     * @return the list of all tariffs contained in DAO layer
+     * @return the list of all tariffs contained in TariffDAO-layer
      */
     public List<Tariff> getAllTariff() {
         return dao.find();
