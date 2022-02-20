@@ -3,10 +3,10 @@ package com.epam.jwd.task01.entity;
 import java.util.Objects;
 
 /**
- * A simplified abstraction of a mobile company client that includes properties such as
- * - account
- * - name
- * - tariff
+ * A simplified abstraction of a mobile company's client that includes properties such as
+ * -- account - identifier for the client
+ * -- name - client's name
+ * -- tariff - client's tariff
  */
 
 public class Client {

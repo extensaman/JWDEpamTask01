@@ -13,7 +13,7 @@ import java.util.Objects;
  * - Internet traffic amount that is included to a tariff
  */
 
-public class Tariff implements Comparable<Tariff>, Cloneable {
+public class Tariff implements Comparable<Tariff> {
     public static final String DEFAULT_TARIFF_NAME = "Base tariff";
     public static final BigDecimal DEFAULT_FIRST_CONNECTION_FEE = BigDecimal.valueOf(0.0);
     public static final BigDecimal DEFAULT_PERIODICAL_FEE = BigDecimal.valueOf(0.0);
@@ -124,10 +124,5 @@ public class Tariff implements Comparable<Tariff>, Cloneable {
             throw new IllegalArgumentException(ILLEGAL_TARIFF_NAME_FOR_COMPARING_TARIFFS);
         }
         return getTariffName().compareTo(that.getTariffName());
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
     }
 }

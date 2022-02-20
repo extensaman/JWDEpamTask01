@@ -25,10 +25,18 @@ public class TariffDAOImpl implements TariffDAO {
     private TariffDAOImpl() {
     }
 
+    /**
+     * Method that provides one single existing instance of the class TariffDAOImpl
+     *
+     * @return one single existing instance of the class TariffDAOImpl
+     */
     public static TariffDAOImpl getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void load(String filePath) {
         TariffFileReader reader = new TariffFileReader(filePath);
@@ -37,16 +45,25 @@ public class TariffDAOImpl implements TariffDAO {
         insert(tariffList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Tariff> find() {
         return find(Optional.empty(), Optional.empty(), Optional.empty());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Tariff> find(Optional<Predicate<Tariff>> filter) {
         return find(filter, Optional.empty(), Optional.empty());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Tariff> find(Optional<Predicate<Tariff>> tariffFilter,
                              Optional<Integer> tariffLimit,
@@ -58,22 +75,31 @@ public class TariffDAOImpl implements TariffDAO {
         return stream.collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void insert(List<Tariff> tariffs) {
         tariffs.stream().forEach(tariff ->
                 tariffsHashMap.put(Long.toString(nextAutoId++), tariff));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteAll() {
         tariffsHashMap.clear();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Optional<Tariff> getById(String id) throws CloneNotSupportedException {
+    public Optional<Tariff> getById(String id) {
         Tariff tariff = tariffsHashMap.get(id);
         if (tariff != null) {
-            return Optional.of((Tariff) tariff.clone());
+            return Optional.of(tariff);
         } else {
             return Optional.empty();
         }

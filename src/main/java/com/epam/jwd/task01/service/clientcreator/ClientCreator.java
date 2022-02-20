@@ -43,17 +43,12 @@ public class ClientCreator {
      * @param name     client's name
      * @param tariffId identifier of tariff in TariffDAO-layer
      * @return in case of existence tariff with identifier <i>tariffId</i> in TariffDAO-layer
-     * returns a new client using <i>account</i>, <i>name</i> and clone of corresponding tariff,
+     * returns a new client using <i>account</i>, <i>name</i> and corresponding tariff,
      * in other case returns a new client using <i>account</i>, <i>name</i> and default tariff
      */
     public Client create(String account, String name, String tariffId) {
-        Optional<Tariff> tariff;
+        Optional<Tariff> tariff = TariffDAOImpl.getInstance().getById(tariffId);
         amount++;
-        try {
-            tariff = TariffDAOImpl.getInstance().getById(tariffId);
-        } catch (CloneNotSupportedException e) {
-            return new Client(account, name);
-        }
         return tariff.map(value ->
                 new Client(account, name, value)).orElseGet(() ->
                 new Client(account, name));
