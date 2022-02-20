@@ -20,7 +20,7 @@ public class ClientLogic {
     /**
      * Method for generating list of all clients contained in ClientDAO-layer
      *
-     * @return  the list of all clients contained in ClientDAO-layer
+     * @return the list of all clients contained in ClientDAO-layer
      */
     public Collection<Client> getAllClient() {
         return dao.find();

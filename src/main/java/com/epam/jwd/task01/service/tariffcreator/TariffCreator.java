@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 
 public class TariffCreator {
-    private static final TariffCreator INSTANCE = new TariffCreator();
+
     public static final int NAME_FIELD = 0;
     public static final int FIRST_CONNECTION_FEE_FIELD = 1;
     public static final int DEFAULT_PERIODICAL_FEE_FIELD = 2;
@@ -31,19 +31,41 @@ public class TariffCreator {
     public static final int CORPORATE_TARIFF_PARAMS_COUNT = 7;
     public static final int BASE_TARIFF_PARAMS_COUNT = 6;
     public static final String UNACCEPTABLE_TARIFF_TYPE = "Unacceptable tariff type";
+
+    private static final TariffCreator INSTANCE = new TariffCreator();
     private long amount = INIT_AMOUNT;
 
     private TariffCreator() {
     }
 
+    /**
+     * Method that provides one single existing instance of the class TariffCreator
+     *
+     * @return one single existing instance of the class TariffCreator
+     */
     public static TariffCreator getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * Method that returns the count of created objects of class Tariff and its inheritors
+     *
+     * @return the count of created objects of class Tariff and its inheritors
+     */
     public long getAmount() {
         return amount;
     }
 
+    /**
+     * Method for creating objects of class Tariff and its inheritors.
+     * It's creates an instance of the Tariff class depending on the type of tariff required
+     *
+     * @param type   required type of tariff. It's one of the allowable tariff's type
+     *               in enumeration {@link com.epam.jwd.task01.entity.TariffTypes}
+     * @param params contains an array of elements with values ​​of the fields
+     *               of the creating object of the Tariff class and its inheritors
+     * @return an instance of the Tariff class or its inheritor depending on the type of tariff required
+     */
     public Tariff create(TariffTypes type, Object... params) {
         switch (type) {
             case BASE:
