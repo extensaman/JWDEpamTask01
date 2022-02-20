@@ -17,6 +17,13 @@ public class TariffValidator {
         this.params = params;
     }
 
+    /**
+     * Method for validating the possibility of creating an object
+     * of the Tariff class with fields equal to <i>Object[] params</i>
+     *
+     * @return <i>true</i> in case of possibility of creating an object,
+     * <i>false</i> in case of impossibility of creating an object
+     */
     public boolean check() {
         boolean result = ((BigDecimal) params[TariffCreator.FIRST_CONNECTION_FEE_FIELD])
                 .compareTo(BigDecimal.ZERO) >= 0 &&
