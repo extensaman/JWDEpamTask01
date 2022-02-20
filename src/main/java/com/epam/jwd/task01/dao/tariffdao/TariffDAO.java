@@ -12,7 +12,7 @@ import java.util.function.Predicate;
  */
 public interface TariffDAO {
     /**
-     * Method for loading data on existing tariffs from a file into a storage in DAO
+     * Method for loading data about existing tariffs from a file into a storage in DAO
      *
      * @param filePath path to a file containing information about existing tariffs
      */

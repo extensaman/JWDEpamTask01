@@ -21,10 +21,18 @@ public class ClientDAOImpl implements ClientDAO {
     private ClientDAOImpl() {
     }
 
+    /**
+     * Method that provides one single existing instance of the class ClientDAOImpl
+     *
+     * @return one single existing instance of the class ClientDAOImpl
+     */
     public static ClientDAOImpl getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void load(String filePath) {
         ClientFileReader reader = new ClientFileReader(filePath);
@@ -33,22 +41,34 @@ public class ClientDAOImpl implements ClientDAO {
         insert(list);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Collection<Client> find() {
         return clientsHashMap.values();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getClientAmount() {
         return clientsHashMap.size();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void insert(Collection<Client> clients) {
-        clients.stream().forEach(client ->
+        clients.forEach(client ->
                 clientsHashMap.put(Long.toString(nextAutoId++), client));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteAll() {
         clientsHashMap.clear();
